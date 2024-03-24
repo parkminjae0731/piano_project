@@ -11,7 +11,7 @@
     position: relative;
     width: 900px; /* 오선지의 너비 900px */
     height: 100px; /* 오선 한 줄의 높이 100px */
-    overflow-x: auto; /* 여백 초과시 좌우 스크롤을 사용할 수 있도록 설정 */
+    
   }
   .line {/* 오선 요소 */
     position: absolute;
@@ -83,20 +83,63 @@
    });
 
    document.addEventListener('DOMContentLoaded', function() {
-  var staff = document.querySelector('.staff');
-  staff.addEventListener('click', function(event) {
-    var x = event.clientX - staff.getBoundingClientRect().left;
-    var y = event.clientY - staff.getBoundingClientRect().top;
-    var note = document.createElement('div');
-    note.className = 'note';
-    note.textContent = '♪';
-    note.style.position = 'absolute'; // 음표의 위치를 절대 위치로 설정
-    note.style.top = y + 'px'; // 클릭한 위치에 따라 음표의 상단 위치를 설정
-    note.style.left = x + 'px'; // 클릭한 위치에 따라 음표의 좌측 위치를 설정
-    staff.appendChild(note);
-  });
-});
+    var staff = document.querySelector('.staff');
 
+    staff.addEventListener('click', function(event) {
+        var x = event.clientX - 10 - staff.getBoundingClientRect().left;
+        var y = event.clientY - 60 - staff.getBoundingClientRect().top;
+        
+        // y 좌표를 조건에 따라 설정
+        if (y >= 16.5 && y <= 100) {
+            y = 19;//라 
+        }else if (y >= 11.5 && y <= 16.4) {
+            y = 14; //시
+        }else if (y >= 6.5 && y <= 11.4) {
+            y = 9; //도
+        } else if (y >= 1.5 && y <= 6.4) {
+            y = 4; // 레
+        } else if (y >= -3.5 && y <= 1.4) {
+            y = -1;  //미
+        } else if (y >= -8.5 && y <= -3.4) {
+            y = -6;  //파
+        } else if (y >= -13.5 && y <= -8.4) {
+            y = -11; //솔
+        } else if (y >= -18.5 && y <= -13.4) {
+            y = -16; //라
+        } else if (y >= -23.5 && y <= -18.4) {
+            y = -21; //시
+        } else if (y >= -28.5 && y <= -23.4) {
+            y = -26; //도
+        }
+        // 클릭한 좌표를 서버로 전송
+        fetch('/clicked_coordinates', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({'x': x, 'y': y})
+        });
+
+        // 음표 생성
+        var note = document.createElement('div');
+        note.className = 'note';
+        if (y <= -21) {
+            // y가 -21보다 작으면 m.png 생성
+            note.innerHTML = '<img src="/static/m.png"  style="width: 15px; height: auto;">';
+          
+            
+         } else {
+            // 그 외에는 음표 생성
+            note.textContent = '♪';
+            
+            
+         }
+        note.style.position = 'absolute';
+        note.style.left = x + 'px';
+        note.style.top = y + 'px';
+        staff.appendChild(note);
+    });
+});
 </script>
 </head>
 <body>
@@ -107,6 +150,9 @@
   <div class="line"></div>
   <div class="line"></div>
 </div>
-
 </body>
 </html>
+
+
+
+
