@@ -18,6 +18,7 @@ def clicked_coordinates():
     print(data) # {'x': 242, 'y': -32}
     x = data['x']
     y = data['y']
+    
     if y == 19:
         pitch_name = "낮은 라"
     elif y == 14:
