@@ -145,6 +145,12 @@
             y = -41; // 파
           } else if (y >= -48.5 && y <= -43.4) {
             y = -46; // 솔
+          } else if (y >= -53.5 && y <= -48.4) {
+            y = -51; // 솔
+          } else if (y >= -58.5 && y <= -53.4) {
+            y = -56; // 솔
+          } else if (y >= -100 && y <= -58.5) {
+            y == 61
           }
 
           // 클릭한 좌표를 서버로 전송
@@ -164,11 +170,12 @@
             y += 41;
             note.innerHTML =
               '<img src="/static/m.png"  style="width: 15px; height: auto;">';
-          } else {
+          }  else {
             // 그 외에는 음표 생성
             note.textContent = "♪";
             //♩
-          }
+          } 
+
           note.style.position = "absolute";
           note.style.left = x + "px";
           note.style.top = y + "px";
@@ -177,7 +184,11 @@
           // 클릭한 좌표들을 저장하는 배열에 추가
           coordinates.push({ x: x, y: y });
         });
-
+        window.addEventListener('beforeunload', function() {
+          fetch('/reset_coordinates', {
+            method: 'POST'
+  });
+});
         // 출력 버튼 클릭 시 서버로부터 좌표 받아와 출력
         var printButton = document.getElementById("printButton");
         printButton.addEventListener("click", function () {
@@ -195,19 +206,6 @@
           alert("좌표를 성공적으로 받아왔습니다.");
         });
       });
-      document.addEventListener("DOMContentLoaded", function () {
-    // staff 요소와 4.png 이미지 요소 가져오기
-    var staff = document.querySelector(".staff");
-    var fourImage = document.querySelector('img[src="/static/4.png"]');
-
-    // staff 요소에서 음자리표 위치 가져오기
-    var note = document.querySelector('.note[data-type="high"]');
-    var notePosition = note.getBoundingClientRect();
-    var noteX = notePosition.left;
-
-    // 4.png 이미지의 left 속성 설정하기
-    fourImage.style.left = noteX + "px";
-});
     </script>
   </head>
   <body>
@@ -217,9 +215,10 @@
       <div class="line"></div>
       <div class="line"></div>
       <div class="line"></div>
+      
     </div>
     <button id="printButton">출력</button>
-    <!-- <script>
+    <script>
       document
         .getElementById("printButton")
         .addEventListener("click", function () {
@@ -237,7 +236,7 @@
               alert("서버에 연결할 수 없습니다.");
             });
         });
-    </script> -->
+    </script>
     <img src="/static/4.png" style="width: 64px;height: auto;position: absolute;left: 55px;top: 3.9%;" />
   </body>
 </html>
