@@ -1,7 +1,8 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 import json
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/static')
+
 
 coordinates = []
 staff = []
@@ -64,7 +65,8 @@ def print_coordinates():
     a_staff = [coord[1] for coord in sorted_staff]
     print("Y 좌표:", [item[0][1] for item in staff])
     print(a_staff)
-    return json.dumps(str(a_staff))
+    return jsonify({"success": True, "message": str(a_staff)})
+
 
 @app.route('/reset_coordinates', methods=['POST'])
 def reset_coordinates():
@@ -75,4 +77,4 @@ def reset_coordinates():
     return {'message': 'Coordinates reset successfully.'}
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True) 

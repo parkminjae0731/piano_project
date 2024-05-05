@@ -1,0 +1,39 @@
+/* 악보 전체 요소 */
+.staff {
+   /* 악보 전체 요소 */
+   margin: 20px auto; /* 상하단 20px여백 */
+   position: relative;
+   width: 900px; /* 오선지의 너비 900px */
+   height: 100px; /* 오선 한 줄의 높이 100px */
+}
+/* 오선 요소 */
+.line {
+   /* 오선 요소 */
+   position: absolute;
+   width: 100%; /* 상위 요소인 satff의 가로길의 100%인 선의 길이 */
+   border-bottom: 1px solid rgb(0, 0, 0);
+}
+/* 첫 번째 오선 */
+.line:nth-child(1) {
+   top: 20%;
+} /* 두 번째 오선 */    
+.line:nth-child(2) {
+   top: 30%;
+} /* 세 번째 오선 */
+.line:nth-child(3) {
+   top: 40%;
+} /* 네 번째 오선 */
+.line:nth-child(4) {
+   top: 50%;
+} /* 다섯 번째 오선 */
+.line:nth-child(5) {
+   top: 60%;
+} 
+   /* 음자리표 요소 */     
+.note {
+   
+   position: absolute;
+   font-size: 56px; /* 음자리표 크기 */
+   top: 10%; /* 음자리표의 기본 위치 */
+   left: 10px; /* 음자리표의 기본 위치 */
+}
