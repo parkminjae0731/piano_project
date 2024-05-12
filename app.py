@@ -6,10 +6,12 @@ app = Flask(__name__, static_url_path='/static')
 
 coordinates = []
 staff = []
+staff2 = []
 pitch_name = str
 
-@app.route('/')
+@app.route('/', methods = ['POST','GET'])
 def index():
+
     return render_template('dsz.html')
 
 @app.route('/clicked_coordinates', methods=['POST'])
@@ -57,23 +59,30 @@ def clicked_coordinates():
     print(pitch_name)
     coordinates.append((x, y))
     staff.append(((x, y), pitch_name))
+    staff2.append(((x, y), pitch_name))
     return {'message': 'Received clicked coordinates successfully.'}
   
 @app.route('/print_coordinates', methods=['GET'])
 def print_coordinates():
     sorted_staff = sorted(staff, key=lambda coord: coord[0][0])
+    sorted_staff2 = sorted(staff2, key=lambda coord: coord[0][0])
     a_staff = [coord[1] for coord in sorted_staff]
+    a_staff2 = [coord[1] for coord in sorted_staff2]
     print("Y 좌표:", [item[0][1] for item in staff])
     print(a_staff)
-    return jsonify({"success": True, "message": str(a_staff)})
+    print("Y 좌표:", [item[0][1] for item in staff2])
+    print(a_staff2)
+    return jsonify({"success": True, "message": str(a_staff), "message": str(a_staff2)})
 
 
 @app.route('/reset_coordinates', methods=['POST'])
 def reset_coordinates():
     global coordinates
     global staff
+    global staff2
     coordinates = []
     staff = []
+    staff2 = []
     return {'message': 'Coordinates reset successfully.'}
 
 if __name__ == '__main__':

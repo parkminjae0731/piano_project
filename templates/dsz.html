@@ -4,9 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Piano Sheet</title>
-    <center><h1>나만의 오케스트라</h1></center>
+    <!--<center><h1>나만의 오케스트라</h1></center>-->
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/staff.css') }}">
-    <script src="{{ url_for('static', filename='scripts/coordinate.js') }}"></script>
+    <script src="{{ url_for('static', filename='scripts/coordinate p.js') }}"></script>
+    <script src="{{ url_for('static', filename='scripts/coordinate v.js') }}"></script>
 </head>
 <body>
     <div class="staff">
@@ -16,6 +17,13 @@
         <div class="line"></div>
         <div class="line"></div>
     </div>
-    <button id="printButton" style="position: absolute; left: ">출력</button>
+    <div class="staff2">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+    </div>
+    <button id="printButton" style="position: absolute; left: 50%">출력</button>
 </body>
 </html>

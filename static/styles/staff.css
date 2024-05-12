@@ -6,6 +6,15 @@
    width: 900px; /* 오선지의 너비 900px */
    height: 100px; /* 오선 한 줄의 높이 100px */
 }
+/* 악보 전체 요소 */
+.staff2 {
+   /* 악보 전체 요소 */
+   margin: 20px auto; /* 상하단 20px여백 */
+   position: relative;
+   width: 900px; /* 오선지의 너비 900px */
+   height: 100px; /* 오선 한 줄의 높이 100px */
+}
+
 /* 오선 요소 */
 .line {
    /* 오선 요소 */
