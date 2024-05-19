@@ -1,5 +1,4 @@
-// 높은 음자리, 낮은 음자리 생성
-b = 0
+b = 0;
 document.addEventListener("DOMContentLoaded", function () {
     var staff = document.querySelector(".staff");
 

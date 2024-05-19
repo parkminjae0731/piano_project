@@ -1,5 +1,9 @@
 // 높은 음자리, 낮은 음자리 생성
 a = 0
+function sleep(ms) {
+    const wakeUpTime = Date.now() + ms;
+    while (Date.now() < wakeUpTime) {}
+}
 document.addEventListener("DOMContentLoaded", function () {
     var staff2 = document.querySelector(".staff2");
 
@@ -130,6 +134,7 @@ document.addEventListener("DOMContentLoaded", function () {
             x -= 3;
             note.innerHTML =
                 '<img src="/static/imagi/upper_removed.png"  style="width: 24px; height: auto;">';
+         
         } else if (y == -56) {
             // y가 -56이면 m.png 생성
             y += 42
@@ -139,6 +144,8 @@ document.addEventListener("DOMContentLoaded", function () {
             x -= 5;
             note.innerHTML =
                 '<img src="/static/imagi/upper_removed1.png"  style="width: 26px; height: auto;">';
+
+         
         } else if (y == -61) {
             // y가 -61이면 m.png 생성
             y += 42
@@ -183,6 +190,7 @@ document.addEventListener("DOMContentLoaded", function () {
             x -= 5
             note.innerHTML =
                 '<img src="/static/imagi/rm2.png"  style="width: 30px; height: auto;">';
+
         } else {
             // 그 외에는 음표 생성
             y += 12
@@ -192,6 +200,7 @@ document.addEventListener("DOMContentLoaded", function () {
             x -= 14
             note.innerHTML =
                 '<img src="/static/imagi/8min.png"  style="width: 54px; height: auto;">';
+
             //♩
         }
         
@@ -219,9 +228,99 @@ document.addEventListener("DOMContentLoaded", function () {
         // 정렬된 좌표 출력
         coordinates.forEach(function (coord) {
             console.log("Y 좌표:", coord.y);
+            
         });
+        
+        for(let i=80;i<860;i++){
+            coordinates.forEach(function (coord) {
+                if (coord.x === i){
+                    y = coord.y
+                    sleep(1000);
+                    if (y >= 16.5 && y <= 100) {
+                        y = 19; // 낮은라
+                        console.log('낮은라')
+                        var audio = new Audio('/static/sounds/scales/낮은 라.mp3'); // 경로 수정
+                        audio.play();
+                    } else if (y >= 11.5 && y <= 16.4) {
+                        y = 14; // 낮은시
+                        console.log('낮은시')
+                        var audio = new Audio('/static/sounds/scales/낮은 시.mp3'); // 경로 수정
+                        audio.play();
+                    } else if (y >= 6.5 && y <= 11.4) {
+                        y = 9; // 도
+                        console.log('도')
+            
+                        // 도 음표를 재생하는 오디오 요소 추가
+                        var audio = new Audio('/static/sounds/scales/중간 도.mp3'); // 경로 수정
+                        audio.play();
+                    } else if (y >= 1.5 && y <= 6.4) {
+                        y = 4; // 레
+                        console.log('레')
+                        var audio = new Audio('/static/sounds/scales/중간 레.mp3'); // 경로 수정
+                        audio.play();
+                    } else if (y >= -3.5 && y <= 1.4) {
+                        y = -1; // 미
+                        console.log('미')
+                        var audio = new Audio('/static/sounds/scales/중간 미.mp3'); // 경로 수정
+                        audio.play();
+                    } else if (y >= -8.5 && y <= -3.4) {
+                        y = -6; // 파
+                        console.log('파')
+                        var audio = new Audio('/static/sounds/scales/중간 파.mp3'); // 경로 수정
+                        audio.play();
+                    } else if (y >= -13.5 && y <= -8.4) {
+                        y = -11; // 솔
+                        console.log('솔')
+                        var audio = new Audio('/static/sounds/scales/중간 솔.mp3'); // 경로 수정
+                        audio.play();
+                    } else if (y >= -18.5 && y <= -13.4) {
+                        y = -16; // 라
+                        console.log('라')
+                        var audio = new Audio('/static/sounds/scales/중간 라.mp3'); // 경로 수정
+                        audio.play();
+                    } else if (y >= -23.5 && y <= -18.4) {
+                        y = -21; // 시
+                        console.log('시')
+                        var audio = new Audio('/static/sounds/scales/중간 시.mp3'); // 경로 수정
+                        audio.play();
+                    } else if (y >= -28.5 && y <= -23.4) {
+                        y = -26; // 도
+                        console.log('높은 도')
+                        var audio = new Audio('/static/sounds/scales/높은 도.mp3'); // 경로 수정
+                        audio.play();
+                    } else if (y >= -33.5 && y <= -28.4) {
+                        y = -31; // 레
+                        console.log('레')
+                        var audio = new Audio('/static/sounds/scales/높은 레.mp3'); // 경로 수정
+                        audio.play();
+                    } else if (y >= -38.5 && y <= -33.4) {
+                        y = -36; // 미
+                        console.log('미')
+                        var audio = new Audio('/static/sounds/scales/높은 미.mp3'); // 경로 수정
+                        audio.play();
+                    } else if (y >= -43.5 && y <= -38.4) {
+                        y = -41; // 파
+                        console.log('파')
+                    } else if (y >= -48.5 && y <= -43.4) {
+                        y = -46; // 솔
+                        console.log('솔')
+                    } else if (y >= -53.5 && y <= -48.4) {
+                        y = -51; // 라
+                        console.log('라')
+                    } else if (y >= -58.5 && y <= -53.4) {
+                        y = -56; // 시
+                        console.log('시')
+                    } else if (y >= -100 && y <= -58.4) {
+                        y = -61
+                        console.log('짱 높은도')
+                    }
+                }
+                
+            });
+           
+        }
 
-        // 서버로부터 좌표를 성공적으로 받아왔다는 메시지를 alert로 출력
+        
         alert("좌표를 성공적으로 받아왔습니다.");
     });
 });
