@@ -4,26 +4,56 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Piano Sheet</title>
-    <!--<center><h1>나만의 오케스트라</h1></center>-->
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/staff.css') }}">
-    <script src="{{ url_for('static', filename='scripts/coordinate p.js') }}"></script>
-    <script src="{{ url_for('static', filename='scripts/coordinate v.js') }}"></script>
+    <script src="{{ url_for('static', filename='scripts/coordinate_v.js') }}"></script>
 </head>
 <body>
-    <div class="staff">
-        <div class="line"></div>
-        <div class="line"></div>
-        <div class="line"></div>
-        <div class="line"></div>
-        <div class="line"></div>
-    </div>
-    <div class="staff2">
-        <div class="line"></div>
-        <div class="line"></div>
-        <div class="line"></div>
-        <div class="line"></div>
-        <div class="line"></div>
+    <div id="staffContainer">
+        <div class="staff2">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </div>
     </div>
     <button id="printButton" style="position: absolute; left: 50%">출력</button>
+    <button id="addStaffButton" style="position: absolute; left: 60%">오선 추가</button>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var staffContainer = document.getElementById("staffContainer");
+            var addStaffButton = document.getElementById("addStaffButton");
+            var staff2 = document.getElementById("staff2");
+
+       
+            
+            addStaffButton.addEventListener("click", function () {
+                var newStaff = document.createElement("div");
+                newStaff.className = "staff2";
+                newStaff.innerHTML = `
+                    <div class="line"></div>
+                    <div class="line"></div>
+                    <div class="line"></div>
+                    <div class="line"></div>
+                    <div class="line"></div>
+                   
+                `;
+                staffContainer.appendChild(newStaff);
+
+            staff2.addEventListener("click", createNote);
+            function createNote(event) {
+                var offsetX = event.clientX - staffContainer.getBoundingClientRect().left;
+                var offsetY = event.clientY - staffContainer.getBoundingClientRect().top;
+
+                var note = document.createElement("div");
+                note.className = "note";
+                note.style.left = offsetX + "px";
+                note.style.top = offsetY + "px";
+
+                staffContainer.appendChild(note);
+            }
+                });
+            });
+    </script>
 </body>
 </html>

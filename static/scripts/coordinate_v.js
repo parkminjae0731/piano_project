@@ -5,7 +5,7 @@ function sleep(ms) {
 }
 document.addEventListener("DOMContentLoaded", function () {
     var staff2 = document.querySelector(".staff2");
-
+    
     // 높은 음자리표 추가
     var note = document.createElement("div");
     note.className = "note";
